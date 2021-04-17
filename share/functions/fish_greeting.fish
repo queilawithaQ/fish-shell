@@ -3,6 +3,12 @@ function fish_greeting
         set -l line1 (_ 'Welcome to fish, the friendly interactive shell')
         set -l line2 \n(printf (_ 'Type %shelp%s for instructions on how to use fish') (set_color green) (set_color normal))
         set -g fish_greeting "$line1$line2"
+        if string match -qir '.*\.utf-?8' -- $LANG $LC_CTYPE
+            set -l fishes 🐟 🐠 🐡 🐳 🐢 🐡 🦀 🐸 🦞 🦈 🦭 🐙 🦑
+            set -l f (random choice $fishes; random choice $fishes; random choice $fishes)
+            set fish_greeting "$fish_greeting"\n"$f"
+        end
+
     end
 
     if set -q fish_private_mode
